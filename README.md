@@ -6,7 +6,7 @@ Omni-Sync is a high-performance, real-time collaborative markdown editor designe
 
 ### 🎥 Live Demonstration
 
-![Working Demo Video](./assets/demo.mp4)
+![Working Demo Video](./assets/demo.webp)
 
 
 ## System Overview
