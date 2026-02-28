@@ -14,12 +14,12 @@ export default function Home() {
     <main className="container">
       <header className="header">
         <div className="logo">
-          <Terminal size={24} color="#a855f7" />
-          Omni-Sync Playbooks
+          <Terminal size={28} color="#0cebeb" strokeWidth={2.5} />
+          <span style={{ letterSpacing: "-0.02em" }}>Omni-Sync Playbooks</span>
         </div>
         <div className="status-indicator">
           <div className="status-dot"></div>
-          <span>Connected</span>
+          <span>System Online</span>
         </div>
       </header>
 
