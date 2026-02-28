@@ -1,12 +1,12 @@
 # Omni-Sync
 
-![Editor Interface](./assets/editor.png)
+![Editor Interface](./assets/editor-demo.png)
 
 Omni-Sync is a high-performance, real-time collaborative markdown editor designed specifically for SRE Incident Playbooks. It combines a highly reliable Go backend using CRDTs (Yjs) with a "Super Frontend" built in Next.js 15.
 
 ### 🎥 Live Demonstration
 
-![Working Demo Video](./assets/demo.webp)
+![Working Demo Video](./assets/demo.mp4)
 
 
 ## System Overview
