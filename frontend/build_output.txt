@@ -1,0 +1,339 @@
+
+> frontend@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 13 errors:
+./src/extensions/K8sLogsExtension.ts:1:1
+Module not found: Can't resolve '@tiptap/core'
+> 1 | import { Node, mergeAttributes, textblockTypeInputRule } from "@tiptap/core";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import { ReactNodeViewRenderer } from "@tiptap/react";
+  3 | import { K8sLogsNodeView } from "../components/K8sLogsNodeView";
+  4 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/extensions/K8sLogsExtension.ts [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/extensions/K8sLogsExtension.ts [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/Editor.tsx:6:1
+Module not found: Can't resolve '@tiptap/extension-collaboration'
+  4 | import { useEditor, EditorContent } from "@tiptap/react";
+  5 | import StarterKit from "@tiptap/starter-kit";
+> 6 | import Collaboration from "@tiptap/extension-collaboration";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+  8 | import * as Y from "yjs";
+  9 | import { WebsocketProvider } from "y-websocket";
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/Editor.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/Editor.tsx:7:1
+Module not found: Can't resolve '@tiptap/extension-collaboration-cursor'
+   5 | import StarterKit from "@tiptap/starter-kit";
+   6 | import Collaboration from "@tiptap/extension-collaboration";
+>  7 | import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import * as Y from "yjs";
+   9 | import { WebsocketProvider } from "y-websocket";
+  10 | import { CursorOverlay } from "./CursorOverlay";
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/Editor.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/Editor.tsx:4:1
+Module not found: Can't resolve '@tiptap/react'
+  2 |
+  3 | import { useEffect, useState, useRef } from "react";
+> 4 | import { useEditor, EditorContent } from "@tiptap/react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import StarterKit from "@tiptap/starter-kit";
+  6 | import Collaboration from "@tiptap/extension-collaboration";
+  7 | import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/Editor.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/K8sLogsNodeView.tsx:3:1
+Module not found: Can't resolve '@tiptap/react'
+  1 | "use client";
+  2 |
+> 3 | import { NodeViewWrapper, NodeViewProps } from "@tiptap/react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useEffect, useState, useRef } from "react";
+  5 | import { Terminal, Trash2 } from "lucide-react";
+  6 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/K8sLogsNodeView.tsx [Client Component Browser]
+    ./src/extensions/K8sLogsExtension.ts [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/K8sLogsNodeView.tsx [Client Component SSR]
+    ./src/extensions/K8sLogsExtension.ts [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/extensions/K8sLogsExtension.ts:2:1
+Module not found: Can't resolve '@tiptap/react'
+  1 | import { Node, mergeAttributes, textblockTypeInputRule } from "@tiptap/core";
+> 2 | import { ReactNodeViewRenderer } from "@tiptap/react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { K8sLogsNodeView } from "../components/K8sLogsNodeView";
+  4 |
+  5 | export const K8sLogsExtension = Node.create({
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/extensions/K8sLogsExtension.ts [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/extensions/K8sLogsExtension.ts [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/Editor.tsx:5:1
+Module not found: Can't resolve '@tiptap/starter-kit'
+  3 | import { useEffect, useState, useRef } from "react";
+  4 | import { useEditor, EditorContent } from "@tiptap/react";
+> 5 | import StarterKit from "@tiptap/starter-kit";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import Collaboration from "@tiptap/extension-collaboration";
+  7 | import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+  8 | import * as Y from "yjs";
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/Editor.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/CursorOverlay.tsx:5:1
+Module not found: Can't resolve 'framer-motion'
+  3 | import { useEffect, useState } from "react";
+  4 | import { WebsocketProvider } from "y-websocket";
+> 5 | import { motion, AnimatePresence } from "framer-motion";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { MousePointer2 } from "lucide-react";
+  7 |
+  8 | interface CursorOverlayProps {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/CursorOverlay.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/CursorOverlay.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/page.tsx:2:1
+Module not found: Can't resolve 'lucide-react'
+  1 | import Editor from "@/components/Editor";
+> 2 | import { Terminal } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export default function Home() {
+  5 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/CursorOverlay.tsx:6:1
+Module not found: Can't resolve 'lucide-react'
+  4 | import { WebsocketProvider } from "y-websocket";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import { MousePointer2 } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | interface CursorOverlayProps {
+  9 |     provider: WebsocketProvider;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/CursorOverlay.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/CursorOverlay.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/K8sLogsNodeView.tsx:5:1
+Module not found: Can't resolve 'lucide-react'
+  3 | import { NodeViewWrapper, NodeViewProps } from "@tiptap/react";
+  4 | import { useEffect, useState, useRef } from "react";
+> 5 | import { Terminal, Trash2 } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export function K8sLogsNodeView({ node, deleteNode }: NodeViewProps) {
+  8 |     const { podName } = node.attrs;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/K8sLogsNodeView.tsx [Client Component Browser]
+    ./src/extensions/K8sLogsExtension.ts [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/K8sLogsNodeView.tsx [Client Component SSR]
+    ./src/extensions/K8sLogsExtension.ts [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/Editor.tsx:9:1
+Module not found: Can't resolve 'y-websocket'
+   7 | import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+   8 | import * as Y from "yjs";
+>  9 | import { WebsocketProvider } from "y-websocket";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { CursorOverlay } from "./CursorOverlay";
+  11 | import { K8sLogsExtension } from "../extensions/K8sLogsExtension";
+  12 |
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/Editor.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/Editor.tsx:8:1
+Module not found: Can't resolve 'yjs'
+   6 | import Collaboration from "@tiptap/extension-collaboration";
+   7 | import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+>  8 | import * as Y from "yjs";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { WebsocketProvider } from "y-websocket";
+  10 | import { CursorOverlay } from "./CursorOverlay";
+  11 | import { K8sLogsExtension } from "../extensions/K8sLogsExtension";
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/Editor.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./src/extensions/K8sLogsExtension.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/Editor.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/Editor.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/Editor.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/K8sLogsNodeView.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/extensions/K8sLogsExtension.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/Editor.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/CursorOverlay.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/page.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/CursorOverlay.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/K8sLogsNodeView.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/Editor.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/Editor.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

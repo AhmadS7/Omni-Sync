@@ -2,14 +2,13 @@ package main
 
 import (
 	"log"
-	"sync"
 )
 
 // Hub maintains the set of active clients grouped by document "room".
 // It acts as the central router for broadcasting CRDT and Presence updates.
 type Hub struct {
 	// Registered clients map across distinct document rooms.
-	// Structure: map[roomName]map[*Client]bool
+	// Structure: map[string]map[*Client]bool
 	rooms map[string]map[*Client]bool
 
 	// Inbound messages to be broadcasted to clients in a particular room.
@@ -23,9 +22,6 @@ type Hub struct {
 
 	// Persistent store for Yjs updates.
 	store *RedisStore
-
-	// Mutex for concurrent room map access.
-	mu sync.RWMutex
 }
 
 // Message represents a payload from a client intended for a specific document.
@@ -51,19 +47,16 @@ func (h *Hub) Run() {
 	for {
 		select {
 		case client := <-h.register:
-			h.mu.Lock()
 			if h.rooms[client.room] == nil {
 				h.rooms[client.room] = make(map[*Client]bool)
 			}
 			h.rooms[client.room][client] = true
 			log.Printf("Client registered to room %s. Total clients: %d", client.room, len(h.rooms[client.room]))
-			h.mu.Unlock()
 
 			// Send existing persistence state down to the new client.
 			go h.sendInitialState(client)
 
 		case client := <-h.unregister:
-			h.mu.Lock()
 			if clients, ok := h.rooms[client.room]; ok {
 				if _, ok := clients[client]; ok {
 					delete(clients, client)
@@ -75,7 +68,6 @@ func (h *Hub) Run() {
 					}
 				}
 			}
-			h.mu.Unlock()
 
 		case message := <-h.broadcast:
 			// NOTE: Implementing y-websocket protocol broadly.
@@ -96,25 +88,31 @@ func (h *Hub) Run() {
 			}
 
 			// Broadcast to all clients in the room except the sender
-			h.mu.RLock()
 			for client := range h.rooms[message.Room] {
 				if client != message.Sender {
 					select {
 					case client.send <- message.Data:
 					default:
-						// Client's send channel is blocked, tear it down.
-						close(client.send)
+						// Client's send channel is blocked.
+						// Unregister will be handled by readPump failing.
+						// Just remove them from the room for now.
 						delete(h.rooms[message.Room], client)
 					}
 				}
 			}
-			h.mu.RUnlock()
 		}
 	}
 }
 
 // sendInitialState reconstructs the CRDT log from Redis and sends it to the newly joined client.
 func (h *Hub) sendInitialState(client *Client) {
+	defer func() {
+		// Recover from panic if the client disconnected and client.send was closed
+		if r := recover(); r != nil {
+			log.Printf("Recovered from panic in sendInitialState: %v", r)
+		}
+	}()
+
 	updates, err := h.store.GetUpdates(client.room)
 	if err != nil {
 		log.Printf("Failed to fetch initial state for room %s: %v", client.room, err)
@@ -122,7 +120,7 @@ func (h *Hub) sendInitialState(client *Client) {
 	}
 
 	for _, update := range updates {
-		client.send <- update
+		client.send <- update // This could panic if client disconnected quickly
 	}
 	log.Printf("Sent %d update packets to client in room %s", len(updates), client.room)
 }

@@ -1,5 +1,13 @@
-import Editor from "@/components/Editor";
+"use client";
+
+import dynamic from "next/dynamic";
 import { Terminal } from "lucide-react";
+
+// Disable SSR for the collaborative editor because Yjs/Websockets rely on browser window objects
+const Editor = dynamic(() => import("@/components/Editor"), {
+  ssr: false,
+  loading: () => <div className="editor-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="status-dot"></div><span style={{ marginLeft: '10px', color: 'var(--text-secondary)' }}>Initializing Sync Engine...</span></div>
+});
 
 export default function Home() {
   return (

@@ -1,0 +1,137 @@
+
+> frontend@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 4 errors:
+./node_modules/@tiptap/extension-collaboration/dist/index.js:4:1
+Module not found: Can't resolve '@tiptap/y-tiptap'
+  2 | import { Extension } from "@tiptap/core";
+  3 | import { Plugin, PluginKey } from "@tiptap/pm/state";
+> 4 | import { redo, undo, ySyncPlugin, yUndoPlugin, yUndoPluginKey, yXmlFragmentToProsemirrorJSON } from "@tiptap/y-tiptap";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | // src/helpers/CollaborationMappablePosition.ts
+  7 | import {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@tiptap/extension-collaboration/dist/index.js [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@tiptap/extension-collaboration/dist/index.js [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@tiptap/extension-collaboration/dist/index.js:13:1
+Module not found: Can't resolve '@tiptap/y-tiptap'
+  11 |
+  12 | // src/helpers/isChangeOrigin.ts
+> 13 | import { ySyncPluginKey } from "@tiptap/y-tiptap";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 | function isChangeOrigin(transaction) {
+  15 |   return !!transaction.getMeta(ySyncPluginKey);
+  16 | }
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@tiptap/extension-collaboration/dist/index.js [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@tiptap/extension-collaboration/dist/index.js [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@tiptap/extension-collaboration/dist/index.js:19:1
+Module not found: Can't resolve '@tiptap/y-tiptap'
+  17 |
+  18 | // src/helpers/yRelativePosition.ts
+> 19 | import {
+     | ^^^^^^^^
+> 20 |   absolutePositionToRelativePosition,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 21 |   relativePositionToAbsolutePosition,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 22 |   ySyncPluginKey as ySyncPluginKey2
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 23 | } from "@tiptap/y-tiptap";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  24 | function getYAbsolutePosition(state, relativePos) {
+  25 |   const ystate = ySyncPluginKey2.getState(state);
+  26 |   return relativePositionToAbsolutePosition(ystate.doc, ystate.type, relativePos, ystate.binding.mapping) || 0;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@tiptap/extension-collaboration/dist/index.js [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@tiptap/extension-collaboration/dist/index.js [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@tiptap/extension-collaboration-cursor/dist/index.js:2:1
+Module not found: Can't resolve 'y-prosemirror'
+  1 | import { Extension } from '@tiptap/core';
+> 2 | import { defaultSelectionBuilder, yCursorPlugin } from 'y-prosemirror';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | const awarenessStatesToArray = (states) => {
+  5 |     return Array.from(states.entries()).map(([key, value]) => {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@tiptap/extension-collaboration-cursor/dist/index.js [Client Component Browser]
+    ./src/components/Editor.tsx [Client Component Browser]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@tiptap/extension-collaboration-cursor/dist/index.js [Client Component SSR]
+    ./src/components/Editor.tsx [Client Component SSR]
+    ./src/components/Editor.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at ./node_modules/ (tiptap/extension-collaboration/dist/index.js:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (tiptap/extension-collaboration/dist/index.js:13:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (tiptap/extension-collaboration/dist/index.js:19:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (tiptap/extension-collaboration-cursor/dist/index.js:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

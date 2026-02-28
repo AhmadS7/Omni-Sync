@@ -28,6 +28,7 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
 		return true // Allow all origins for Omni-Sync dev.
 	},
+	Subprotocols: []string{"yjs"}, // Accept y-websocket client protocol
 }
 
 // Client represents a single connected peer interfacing via WebSockets.
