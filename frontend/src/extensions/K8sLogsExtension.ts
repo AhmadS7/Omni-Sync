@@ -1,4 +1,4 @@
-import { Node, mergeAttributes, textblockTypeInputRule } from "@tiptap/core";
+import { Node, mergeAttributes, nodeInputRule } from "@tiptap/core";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import { K8sLogsNodeView } from "../components/K8sLogsNodeView";
 
@@ -38,7 +38,7 @@ export const K8sLogsExtension = Node.create({
         const regex = /^\/k8s-logs\s+([a-zA-Z0-9-]+)\s$/;
 
         return [
-            textblockTypeInputRule({
+            nodeInputRule({
                 find: regex,
                 type: this.type,
                 getAttributes: (match) => {
