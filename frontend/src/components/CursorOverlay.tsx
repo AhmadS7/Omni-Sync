@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { WebsocketProvider } from "y-websocket";
 import { motion, AnimatePresence } from "framer-motion";
 import { MousePointer2 } from "lucide-react";
@@ -15,7 +15,7 @@ interface CursorState {
     mouse?: { x: number; y: number } | null;
 }
 
-export function CursorOverlay({ provider, containerRef }: CursorOverlayProps) {
+export const CursorOverlay = React.memo(function CursorOverlay({ provider, containerRef }: CursorOverlayProps) {
     const [awarenessStates, setAwarenessStates] = useState<Map<number, CursorState>>(new Map());
 
     useEffect(() => {
@@ -104,4 +104,4 @@ export function CursorOverlay({ provider, containerRef }: CursorOverlayProps) {
             </AnimatePresence>
         </div>
     );
-}
+});

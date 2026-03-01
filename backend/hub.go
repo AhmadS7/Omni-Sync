@@ -1,8 +1,32 @@
 package main
 
 import (
+	"errors"
 	"log"
 )
+
+// readVarUint decodes a variable-length unsigned integer from a byte slice.
+func readVarUint(data []byte, offset int) (uint, int, error) {
+	var num uint = 0
+	var mult uint = 1
+	var length int = 0
+	for {
+		if offset >= len(data) {
+			return 0, 0, errors.New("EOF")
+		}
+		r := data[offset]
+		offset++
+		num = num + uint(r&127)*mult
+		mult *= 128
+		length++
+		if r < 128 {
+			return num, offset, nil
+		}
+		if length > 9 {
+			return 0, 0, errors.New("invalid varuint format")
+		}
+	}
+}
 
 // Hub maintains the set of active clients grouped by document "room".
 // It acts as the central router for broadcasting CRDT and Presence updates.
@@ -74,16 +98,18 @@ func (h *Hub) Run() {
 			// y-websocket has message types (0 = Sync, 1 = Awareness).
 			// We sniff the first byte to see if it's a Sync update to persist it.
 			if len(message.Data) > 0 {
-				msgType := message.Data[0]
-				// Type 0 is Sync. We are simplifying for brevity but ideally we parse the SyncStep here.
-				// In a full implementation, we'd check if it's SyncStep2 or Update and then append.
-				if msgType == 0 {
-					// Async save to Redis to not block the broadcast loop.
-					go func(room string, data []byte) {
-						if err := h.store.AppendUpdate(room, data); err != nil {
-							log.Printf("Redis AppendUpdate error: %v", err)
-						}
-					}(message.Room, message.Data)
+				msgType, offset, err := readVarUint(message.Data, 0)
+				if err == nil && msgType == 0 { // Type 0 is Sync
+					syncType, _, err := readVarUint(message.Data, offset)
+					// In a full implementation, we'd check if it's SyncStep2 (1) or Update (2) and then append.
+					if err == nil && (syncType == 1 || syncType == 2) {
+						// Async save to Redis to not block the broadcast loop.
+						go func(room string, data []byte) {
+							if err := h.store.AppendUpdate(room, data); err != nil {
+								log.Printf("Redis AppendUpdate error: %v", err)
+							}
+						}(message.Room, message.Data)
+					}
 				}
 			}
 
